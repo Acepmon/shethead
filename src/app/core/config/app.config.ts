@@ -3,6 +3,7 @@ import { Layout } from 'app/layout/layout.types';
 // Types
 export type Scheme = 'auto' | 'dark' | 'light';
 export type Theme = 'default' | string;
+export type Common = string[]; // Common modules to enable
 
 /**
  * AppConfig interface. Update this interface to strictly type your config
@@ -13,6 +14,7 @@ export interface AppConfig
     layout: Layout;
     scheme: Scheme;
     theme: Theme;
+    common: Common;
 }
 
 /**
@@ -24,7 +26,8 @@ export interface AppConfig
  * FuseConfigService and its methods.
  */
 export const appConfig: AppConfig = {
-    layout: 'classy',
-    scheme: 'light',
-    theme : 'default'
+    layout: 'compact',
+    scheme: 'auto',
+    theme : 'indigo',
+    common: ['languages', 'fullscreen', 'messages', 'notifications', 'search', 'shortcuts', 'user']
 };

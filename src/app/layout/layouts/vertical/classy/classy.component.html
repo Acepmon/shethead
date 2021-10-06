@@ -66,11 +66,13 @@
         </button>
         <!-- Components -->
         <div class="flex items-center pl-2 ml-auto space-x-1 sm:space-x-2">
-            <languages></languages>
-            <fuse-fullscreen class="hidden md:block"></fuse-fullscreen>
-            <search [appearance]="'bar'"></search>
-            <shortcuts></shortcuts>
-            <messages></messages>
+            <ng-container *ngFor="let commonModule of common">
+                <languages *ngIf="commonModule == 'languages'"></languages>
+                <fuse-fullscreen *ngIf="commonModule == 'fullscreen'" class="hidden md:block"></fuse-fullscreen>
+                <search *ngIf="commonModule == 'search'" [appearance]="'bar'"></search>
+                <shortcuts *ngIf="commonModule == 'shortcuts'"></shortcuts>
+                <messages *ngIf="commonModule == 'messages'"></messages>
+            </ng-container>
         </div>
     </div>
 

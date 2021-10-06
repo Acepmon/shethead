@@ -8,6 +8,8 @@ import { Navigation } from 'app/core/navigation/navigation.types';
 import { NavigationService } from 'app/core/navigation/navigation.service';
 import { User } from 'app/core/user/user.types';
 import { UserService } from 'app/core/user/user.service';
+import { FuseConfigService } from '@fuse/services/config';
+import { AppConfig, Common } from 'app/core/config/app.config';
 
 @Component({
     selector     : 'classy-layout',
@@ -19,6 +21,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
     isScreenSmall: boolean;
     navigation: Navigation;
     user: User;
+    common: Common;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -30,7 +33,8 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
         private _navigationService: NavigationService,
         private _userService: UserService,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
-        private _fuseNavigationService: FuseNavigationService
+        private _fuseNavigationService: FuseNavigationService,
+        private _fuseConfigService: FuseConfigService
     )
     {
     }
@@ -78,6 +82,11 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy
                 // Check if the screen is small
                 this.isScreenSmall = !matchingAliases.includes('md');
             });
+
+        // Subscribe to app config
+        this._fuseConfigService.config$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((config: AppConfig) => this.common = config.common);
     }
 
     /**

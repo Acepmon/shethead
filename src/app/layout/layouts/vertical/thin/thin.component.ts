@@ -6,6 +6,8 @@ import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
 import { Navigation } from 'app/core/navigation/navigation.types';
 import { NavigationService } from 'app/core/navigation/navigation.service';
+import { AppConfig, Common } from 'app/core/config/app.config';
+import { FuseConfigService } from '@fuse/services/config';
 
 @Component({
     selector     : 'thin-layout',
@@ -16,6 +18,7 @@ export class ThinLayoutComponent implements OnInit, OnDestroy
 {
     isScreenSmall: boolean;
     navigation: Navigation;
+    common: Common;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -26,7 +29,8 @@ export class ThinLayoutComponent implements OnInit, OnDestroy
         private _router: Router,
         private _navigationService: NavigationService,
         private _fuseMediaWatcherService: FuseMediaWatcherService,
-        private _fuseNavigationService: FuseNavigationService
+        private _fuseNavigationService: FuseNavigationService,
+        private _fuseConfigService: FuseConfigService
     )
     {
     }
@@ -67,6 +71,11 @@ export class ThinLayoutComponent implements OnInit, OnDestroy
                 // Check if the screen is small
                 this.isScreenSmall = !matchingAliases.includes('md');
             });
+
+        // Subscribe to app config
+        this._fuseConfigService.config$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((config: AppConfig) => this.common = config.common);
     }
 
     /**
