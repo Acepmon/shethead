@@ -15,6 +15,7 @@ export interface AppConfig
     scheme: Scheme;
     theme: Theme;
     common: Common;
+    showSettings: boolean;
 }
 
 /**
@@ -26,8 +27,9 @@ export interface AppConfig
  * FuseConfigService and its methods.
  */
 export const appConfig: AppConfig = {
-    layout: 'compact',
+    layout: 'classic',
     scheme: 'auto',
-    theme : 'indigo',
-    common: ['languages', 'fullscreen', 'messages', 'notifications', 'search', 'shortcuts', 'user']
+    theme : 'default',
+    common: ['languages', 'fullscreen', 'messages', 'notifications', 'search', 'shortcuts', 'user'],
+    showSettings: true
 };
