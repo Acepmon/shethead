@@ -20,6 +20,8 @@ export class DenseLayoutComponent implements OnInit, OnDestroy
     navigation: Navigation;
     navigationAppearance: 'default' | 'dense' = 'dense';
     common: Common;
+    showFooter: boolean;
+    showHeader: boolean;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -76,7 +78,11 @@ export class DenseLayoutComponent implements OnInit, OnDestroy
         // Subscribe to app config
         this._fuseConfigService.config$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((config: AppConfig) => this.common = config.common);
+            .subscribe((config: AppConfig) => {
+                this.common = config.common;
+                this.showFooter = config.showFooter;
+                this.showHeader = config.showHeader;
+            });
     }
 
     /**

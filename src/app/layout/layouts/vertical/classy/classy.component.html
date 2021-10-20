@@ -57,24 +57,26 @@
 <div class="flex flex-col flex-auto w-full min-w-0">
 
     <!-- Header -->
-    <div class="relative flex flex-0 items-center w-full h-16 px-4 md:px-6 z-49 shadow dark:shadow-none dark:border-b bg-card dark:bg-transparent print:hidden">
-        <!-- Navigation toggle button -->
-        <button
-            mat-icon-button
-            (click)="toggleNavigation('mainNavigation')">
-            <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
-        </button>
-        <!-- Components -->
-        <div class="flex items-center pl-2 ml-auto space-x-1 sm:space-x-2">
-            <ng-container *ngFor="let commonModule of common">
-                <languages *ngIf="commonModule == 'languages'"></languages>
-                <fuse-fullscreen *ngIf="commonModule == 'fullscreen'" class="hidden md:block"></fuse-fullscreen>
-                <search *ngIf="commonModule == 'search'" [appearance]="'bar'"></search>
-                <shortcuts *ngIf="commonModule == 'shortcuts'"></shortcuts>
-                <messages *ngIf="commonModule == 'messages'"></messages>
-            </ng-container>
+    <ng-container *ngIf="showHeader">
+        <div class="relative flex flex-0 items-center w-full h-16 px-4 md:px-6 z-49 shadow dark:shadow-none dark:border-b bg-card dark:bg-transparent print:hidden">
+            <!-- Navigation toggle button -->
+            <button
+                mat-icon-button
+                (click)="toggleNavigation('mainNavigation')">
+                <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+            </button>
+            <!-- Components -->
+            <div class="flex items-center pl-2 ml-auto space-x-1 sm:space-x-2">
+                <ng-container *ngFor="let commonModule of common">
+                    <languages *ngIf="commonModule == 'languages'"></languages>
+                    <fuse-fullscreen *ngIf="commonModule == 'fullscreen'" class="hidden md:block"></fuse-fullscreen>
+                    <search *ngIf="commonModule == 'search'" [appearance]="'bar'"></search>
+                    <shortcuts *ngIf="commonModule == 'shortcuts'"></shortcuts>
+                    <messages *ngIf="commonModule == 'messages'"></messages>
+                </ng-container>
+            </div>
         </div>
-    </div>
+    </ng-container>
 
     <!-- Content -->
     <div class="flex flex-col flex-auto">
@@ -84,8 +86,10 @@
     </div>
 
     <!-- Footer -->
-    <!--<div class="relative flex flex-0 items-center justify-start w-full h-14 px-4 md:px-6 z-49 border-t bg-card dark:bg-transparent print:hidden">
-        <span class="font-medium text-secondary">Fuse &copy; {{currentYear}}</span>
-    </div>-->
+    <ng-container *ngIf="showFooter">
+        <div class="relative flex flex-0 items-center justify-start w-full h-14 px-4 md:px-6 z-49 border-t bg-card dark:bg-transparent print:hidden">
+            <span class="font-medium text-secondary">Fuse &copy; {{currentYear}}</span>
+        </div>
+    </ng-container>
 
 </div>

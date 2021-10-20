@@ -19,6 +19,8 @@ export class CenteredLayoutComponent implements OnInit, OnDestroy
     navigation: Navigation;
     isScreenSmall: boolean;
     common: Common;
+    showHeader: boolean;
+    showFooter: boolean;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -75,7 +77,11 @@ export class CenteredLayoutComponent implements OnInit, OnDestroy
         // Subscribe to app config
         this._fuseConfigService.config$
             .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((config: AppConfig) => this.common = config.common);
+            .subscribe((config: AppConfig) => {
+                this.common = config.common;
+                this.showFooter = config.showFooter;
+                this.showHeader = config.showHeader;
+            });
     }
 
     /**

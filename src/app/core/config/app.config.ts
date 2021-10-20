@@ -16,6 +16,8 @@ export interface AppConfig
     theme: Theme;
     common: Common;
     showSettings: boolean;
+    showFooter: boolean;
+    showHeader: boolean;
 }
 
 /**
@@ -31,5 +33,7 @@ export const appConfig: AppConfig = {
     scheme: 'auto',
     theme : 'default',
     common: ['languages', 'fullscreen', 'messages', 'notifications', 'search', 'shortcuts', 'user'],
-    showSettings: true
+    showSettings: true,
+    showFooter: true,
+    showHeader: true,
 };
