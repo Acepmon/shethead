@@ -8,15 +8,15 @@ import { InitialDataResolver } from 'app/app.resolvers';
 // tslint:disable:max-line-length
 export const appRoutes: Route[] = [
 
-    // Redirect empty path to '/example'
-    {path: '', pathMatch : 'full', redirectTo: 'example'},
+    // Redirect empty path to '/dual-n-back'
+    {path: '', pathMatch : 'full', redirectTo: 'dual-n-back'},
 
-    // Redirect signed in user to the '/example'
+    // Redirect signed in user to the '/dual-n-back'
     //
     // After the user signs in, the sign in page will redirect the user to the 'signed-in-redirect'
     // path. Below is another redirection for that path to redirect the user to the desired
     // location. This is a small convenience to keep all main routes together here on this file.
-    {path: 'signed-in-redirect', pathMatch : 'full', redirectTo: 'example'},
+    {path: 'signed-in-redirect', pathMatch : 'full', redirectTo: 'dual-n-back'},
 
     // Auth routes for guests
     {
@@ -39,8 +39,8 @@ export const appRoutes: Route[] = [
     // Auth routes for authenticated users
     {
         path: '',
-        canActivate: [AuthGuard],
-        canActivateChild: [AuthGuard],
+        // canActivate: [AuthGuard],
+        // canActivateChild: [AuthGuard],
         component: LayoutComponent,
         data: {
             layout: 'empty'
@@ -66,14 +66,15 @@ export const appRoutes: Route[] = [
     // Admin routes
     {
         path       : '',
-        canActivate: [AuthGuard],
-        canActivateChild: [AuthGuard],
+        // canActivate: [AuthGuard],
+        // canActivateChild: [AuthGuard],
         component  : LayoutComponent,
         resolve    : {
             initialData: InitialDataResolver,
         },
         children   : [
             {path: 'example', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
+            {path: 'dual-n-back', loadChildren: () => import('app/modules/admin/dual-n-back/dual-n-back.module').then(m => m.DualNBackModule)},
         ]
     }
 ];

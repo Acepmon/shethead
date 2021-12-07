@@ -29,11 +29,11 @@ export interface AppConfig
  * FuseConfigService and its methods.
  */
 export const appConfig: AppConfig = {
-    layout: 'classic',
+    layout: 'centered',
     scheme: 'auto',
-    theme : 'default',
-    common: ['languages', 'fullscreen', 'messages', 'notifications', 'search', 'shortcuts', 'user'],
-    showSettings: true,
-    showFooter: true,
+    theme : 'brand',
+    common: ['user'],
+    showSettings: false,
+    showFooter: false,
     showHeader: true,
 };
